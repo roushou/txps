@@ -9,10 +9,14 @@ export class Particle {
   size = 0;
   laneIndex = 0;
   active = false;
+  screenWidth = 0;
+  screenHeight = 0;
 
   reset(laneIndex: number, lanes: Lane[], width: number, height: number): void {
     this.laneIndex = laneIndex;
     this.active = true;
+    this.screenWidth = width;
+    this.screenHeight = height;
     const lane = lanes[laneIndex];
 
     if (lane.orientation === "vertical") {
@@ -21,9 +25,9 @@ export class Particle {
       this.vx = (Math.random() - 0.5) * 0.5;
       this.vy = -(lane.chain.speed + Math.random() * 2);
     } else {
-      this.x = width + 10;
+      this.x = -10;
       this.y = lane.y + Math.random() * lane.h;
-      this.vx = -(lane.chain.speed + Math.random() * 2);
+      this.vx = lane.chain.speed + Math.random() * 2;
       this.vy = (Math.random() - 0.5) * 0.5;
     }
 
